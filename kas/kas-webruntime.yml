@@ -29,8 +29,8 @@ local_conf_header:
     USE_CCACHE = "1"
   root_user: |
     USERS += "root"
-    USER_root[password] = "root"
-    USER_root[flags] = "clear-text-password"
+    USER_root[password] = ""
+    USER_root[flags] = "allow-empty-password"
     USER_root[shell] = "/bin/bash"
   wayland_group: |
     GROUPS += "wayland"
