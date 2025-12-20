@@ -30,6 +30,16 @@ After the build is complete, the final target image will be located under:
 build/tmp/deploy/images/<board>/
 ```
 
+### Display / HDMI Notes
+
+⚠️ IMPORTANT
+
+Ensure that the display is connected to HDMI-A-1.
+
+Some embedded DRM drivers report multiple HDMI outputs as connected even when no physical cable is attached. In such cases, Weston enables all reported outputs, and the IVI shell may create layers for both HDMI-A-1 and HDMI-A-2.
+
+This demo assumes HDMI-A-1 as the primary display output. Connecting the screen to a different HDMI port may result in no visible output or the UI appearing on an unintended display.
+
 ### Known issues
 
 Some distributions use **AppArmor** and in some cases **AppArmor** user namespace creation restrictions cause our platform build to fail with permission errors.
