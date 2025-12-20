@@ -2,7 +2,7 @@ inherit dpkg
 
 DESCRIPTION = "Weston Webruntime Modules"
 
-SRC_URI = "git://git@github.com/zhani/weston-webruntime-modules.git;protocol=https;branch=main; \
+SRC_URI = "git://git@github.com/KodeGood/weston-webruntime-modules.git;protocol=https;branch=main; \
             file://assets \
             file://rules"
 SRCREV = "a666c7bb8fdc39bbb7ed1277589cb488c7f78e11"
