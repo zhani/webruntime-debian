@@ -5,10 +5,23 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
 include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/buildflags.mk
 
+export CC       = clang-20
+export CXX      = clang++-20
+export LD       = lld-20
+export AR       = llvm-ar-20
+export NM       = llvm-nm-20
+export RANLIB   = llvm-ranlib-20
+
+export TARGET := ${DEB_HOST_MULTIARCH}
+
 EXTRA_CMAKE_ARGUMENTS = -DPORT=WPE \
 	-DCMAKE_INSTALL_LIBEXECDIR=lib/$(DEB_HOST_MULTIARCH) \
+	-DCMAKE_C_COMPILER_TARGET=$(TARGET) \
+	-DCMAKE_CXX_COMPILER_TARGET=$(TARGET) \
+	-DCMAKE_C_COMPILER=clang-20 \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 	-DCMAKE_C_FLAGS_DEBUG="" \
+	-DCMAKE_CXX_COMPILER=clang++-20 \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
 	-DCMAKE_CXX_FLAGS_DEBUG="" \
 	-DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \

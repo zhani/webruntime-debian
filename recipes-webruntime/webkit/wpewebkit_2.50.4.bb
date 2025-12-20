@@ -1,15 +1,13 @@
 inherit dpkg
 
 S = "${WORKDIR}/wpewebkit-${PV}"
-SRC_URI = "https://wpewebkit.org/releases/wpewebkit-2.48.3.tar.xz;name=wpewebkit; \
+SRC_URI = "https://wpewebkit.org/releases/wpewebkit-${PV}.tar.xz;name=wpewebkit; \
     file://rules"
-SRC_URI[wpewebkit.sha256sum] = "807571f07e87823b8fb79564692c9b1ef81ee62edbf51345a15bd0e7e1f2e07b"
-
-# Patches
-SRC_URI += "file://0001-WPE-Remove-unnecessary-introspection-annotations.patch"
-SRC_URI += "file://0002-WPE-Build-fix-when-SYSPROF_CAPTURE-is-disabled.patch"
+SRC_URI[wpewebkit.sha256sum] = "d204e405b0975508748c0273c18090304a979e1170ffa2a0a528fad90191ef87"
 
 BINDIR = "${bindir}"
+
+SBUILD_FLAVOR="clang"
 
 DEPENDS += " libsoup3"
 DEBIAN_DEPENDS =. "\${shlibs:Depends}, \${misc:Depends}"
@@ -46,6 +44,7 @@ DEBIAN_BUILD_DEPENDS = " \
     libwpebackend-fdo-1.0-dev, \
     libxslt1-dev, \
     ninja-build, \
+    pkg-config, \
     ruby:native, \
     unifdef:native, \
     wayland-protocols, \

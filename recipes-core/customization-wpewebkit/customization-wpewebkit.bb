@@ -2,7 +2,7 @@ inherit dpkg-raw
 
 DESCRIPTION = "Debian Webruntime WPEWebKit Customization"
 
-DEBIAN_DEPENDS = "plymouth, systemd, weston"
+DEBIAN_DEPENDS = "lighttpd, plymouth, systemd, weston"
 
 SRC_URI = " \
     file://weston.service.d/override.conf \
@@ -13,7 +13,8 @@ SRC_URI = " \
     file://webruntime-app-useragent.png \
     file://webruntime-logo-wpe.png \
     file://webruntime-splash-wpe.png \
-    file://weston-wpewebkit.ini.tmpl"
+    file://weston-wpewebkit.ini.tmpl \
+    file://youtube_bbb.html"
 
 def distro_to_lib_arch(d):
     DISTRO_TO_LIB_ARCH = {
@@ -44,5 +45,8 @@ do_install() {
 
     install -v -d ${D}/usr/share/plymouth/themes/spinner/
     install -v -m 0644 ${WORKDIR}/webruntime-splash-wpe.png ${D}/usr/share/plymouth/themes/spinner/background-tile.png
+
+    install -v -d ${D}/var/www/html/
+    install -m 0644 ${WORKDIR}/youtube_bbb.html ${D}/var/www/html/
 }
 

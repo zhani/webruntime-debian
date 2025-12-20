@@ -20,6 +20,7 @@ IMAGE_PREINSTALL:append = " \
     keyboard-configuration \
     libgl1-mesa-dri \
     libpam-systemd \
+    lighttpd \
     lshw \
     lsb-release \
     ntpsec \
