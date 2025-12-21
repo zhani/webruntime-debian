@@ -62,7 +62,7 @@ choice
   default WEBRUNTIME_WPEWEBKIT
 
 config WEBRUNTIME_WPEWEBKIT
-  bool "WPEWebKit"
+  bool "WPEWebKit (2.50.4)"
   help
     WPEWebKit based webruntime.
 
