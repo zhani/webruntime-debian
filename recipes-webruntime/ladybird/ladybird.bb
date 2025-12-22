@@ -5,8 +5,14 @@ SRC_URI = "git://github.com/LadybirdBrowser/ladybird.git;protocol=https;branch=m
     file://0002-Support-OpenSSL-3.2.patch \
     file://0003-Build-Lagom-tools-when-cross-compiling.patch \
     file://0004-Hack-frameless-Qt-BrowserWindow.patch \
+    file://0005-Meta-CMake-Do-not-use-march-native-when-cross-compil.patch \
     file://rules"
-SRCREV = "e2c935475f615cc7b5ebf83a2aec806d11be394f"
+
+SRC_URI:append:bookworm = " \
+    file://0006-Revert-ML-DSA.patch \
+    file://0007-Support-libxml2-2.12.patch"
+
+SRCREV = "b65b8c2e6ab81798ea6a43e11ac62f6e06bf6525"
 
 S = "${WORKDIR}/git"
 
@@ -42,6 +48,7 @@ DEBIAN_BUILD_DEPENDS = " \
     libjxl-dev, \
     libpng-dev, \
     libpulse-dev, \
+    libsdl3-dev, \
     libskia-dev, \
     libssl-dev, \
     libsqlite3-dev, \
@@ -49,6 +56,7 @@ DEBIAN_BUILD_DEPENDS = " \
     libwebp-dev, \
     libwoff-dev, \
     libxkbcommon-dev, \
+    libxml2-dev, \
     nasm, \
     ninja-build, \
     pkg-config, \

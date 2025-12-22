@@ -1,14 +1,14 @@
-From 2abb08b384bbb9fe3326acb7cc6175a34df1a289 Mon Sep 17 00:00:00 2001
+From 95450a7ae8aff926c4d78970ca33c223894d34c5 Mon Sep 17 00:00:00 2001
 From: Jani Hautakangas <jani@kodegood.com>
 Date: Sun, 24 Aug 2025 00:18:34 +0300
-Subject: [PATCH 3/4] Build Lagom tools when cross compiling
+Subject: [PATCH 3/7] Build Lagom tools when cross compiling
 
 ---
  Meta/Lagom/CMakeLists.txt | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/Meta/Lagom/CMakeLists.txt b/Meta/Lagom/CMakeLists.txt
-index c6793327fb..0d7c889cf5 100644
+index cd77177649..a3c5419219 100644
 --- a/Meta/Lagom/CMakeLists.txt
 +++ b/Meta/Lagom/CMakeLists.txt
 @@ -73,10 +73,10 @@ endif()

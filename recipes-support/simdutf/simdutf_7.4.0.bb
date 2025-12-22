@@ -6,7 +6,7 @@ S = "${WORKDIR}/simdutf-${PV}"
 
 SRC_URI = "https://github.com/simdutf/simdutf/archive/refs/tags/v${PV}.tar.gz;name=simdutf; \
     file://rules"
-SRC_URI[simdutf.sha256sum] = "ff5ee7fa9a02372819ca9fbb78983dd6e9a2140a13507c98fd9b91d2766bf9b5"
+SRC_URI[simdutf.sha256sum] = "8fd729ebfd5ec56cb0395bcc176c4801e1f8a0ea834d166d52279d7b9e801283"
 
 DEBIAN_PROVIDES = "simdutf, simdutf-dev"
 

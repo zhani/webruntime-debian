@@ -1,7 +1,7 @@
-From 72418ac522dcb6f77ee36403c45c093ff6082dca Mon Sep 17 00:00:00 2001
+From 2a00a4c3d1e058396656f6c73446682a9937ed97 Mon Sep 17 00:00:00 2001
 From: Jani Hautakangas <jani@kodegood.com>
 Date: Sun, 17 Aug 2025 17:21:28 +0300
-Subject: [PATCH 2/4] Support OpenSSL < 3.2
+Subject: [PATCH 2/7] Support OpenSSL < 3.2
 
 ---
  Libraries/LibCrypto/Curves/EdwardsCurve.cpp | 8 ++++++++

@@ -19,6 +19,7 @@ IMAGE_PREINSTALL += " \
     plymouth \
     plymouth-themes \
     polkitd \
+    pulseaudio \
     sudo \
     systemd \
     systemd-resolved \

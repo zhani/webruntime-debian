@@ -4,10 +4,10 @@ PR = "0"
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://skia.googlesource.com/skia.git;protocol=https;branch=chrome/m129;name=skia; \
+SRC_URI = "git://skia.googlesource.com/skia.git;protocol=https;branch=chrome/m144;name=skia; \
     file://skia.pc.tmpl \
     file://debian"
-SRCREV = "f406b708b8c0d31e1bfad101fc3d1ff00e7fb19e"
+SRCREV = "ee20d565acb08dece4a32e3f209cdd41119015ca"
 
 DEPENDS:append:debian12 = "vulkan-memory-allocator"
 

@@ -1,31 +1,74 @@
-From 3ee043f86e028c0e82b1457fa254cb47c47c39b6 Mon Sep 17 00:00:00 2001
+From 5043818f859f0bf67e085c4d95a11bb4bdfddb43 Mon Sep 17 00:00:00 2001
 From: Jani Hautakangas <jani@kodegood.com>
-Date: Fri, 11 Jul 2025 10:16:24 +0300
-Subject: [PATCH 1/4] Downgrade icu version requirement
+Date: Sun, 21 Dec 2025 11:10:12 +0200
+Subject: [PATCH 1/7] Downgrade icu version requirement
 
 ---
- Libraries/LibUnicode/CMakeLists.txt | 2 +-
- Libraries/LibUnicode/TimeZone.cpp   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ Libraries/LibUnicode/CMakeLists.txt     |  2 +-
+ Libraries/LibUnicode/CharacterTypes.cpp | 31 +++++++++++++++++++++++--
+ Libraries/LibUnicode/TimeZone.cpp       |  2 +-
+ 3 files changed, 31 insertions(+), 4 deletions(-)
 
 diff --git a/Libraries/LibUnicode/CMakeLists.txt b/Libraries/LibUnicode/CMakeLists.txt
-index ca1d39d7b9..8d48871731 100644
+index 49a610930b..8d48871731 100644
 --- a/Libraries/LibUnicode/CMakeLists.txt
 +++ b/Libraries/LibUnicode/CMakeLists.txt
 @@ -24,7 +24,7 @@ set(GENERATED_SOURCES ${CURRENT_LIB_GENERATED})
  
  ladybird_lib(LibUnicode unicode)
  
--find_package(ICU 76 REQUIRED COMPONENTS data i18n uc)
+-find_package(ICU 78 REQUIRED COMPONENTS data i18n uc)
 +find_package(ICU 72 REQUIRED COMPONENTS data i18n uc)
  target_link_libraries(LibUnicode PRIVATE ICU::i18n ICU::uc ICU::data)
  
  # FIXME: Add support for building LibGfx in sanitize
+diff --git a/Libraries/LibUnicode/CharacterTypes.cpp b/Libraries/LibUnicode/CharacterTypes.cpp
+index 5bb42d6a23..9abd694b30 100644
+--- a/Libraries/LibUnicode/CharacterTypes.cpp
++++ b/Libraries/LibUnicode/CharacterTypes.cpp
+@@ -349,8 +349,35 @@ Vector<String> get_property_strings(Property property)
+         }
+     }
+ 
+-    for (auto const& str : unicode_set->strings()) {
+-        result.append(icu_string_to_string(str));
++    UErrorCode ec = U_ZERO_ERROR;
++    int32_t item_count = uset_getItemCount(icu_set);
++
++    for (int32_t i = 0; i < item_count; ++i) {
++        UChar32 start = 0;
++        UChar32 end = 0;
++        UChar buffer[256];
++
++        int32_t length = uset_getItem(
++            icu_set,
++            i,
++            &start,
++            &end,
++            buffer,
++            AK::array_size(buffer),
++            &ec
++        );
++
++        if (U_FAILURE(ec))
++            break;
++
++        // String item
++        if (length >= 0) {
++            result.append(
++                icu_string_to_string(
++                    icu::UnicodeString(buffer, length)
++                )
++            );
++        }
+     }
+ 
+     return result;
 diff --git a/Libraries/LibUnicode/TimeZone.cpp b/Libraries/LibUnicode/TimeZone.cpp
-index ac84034ef0..6efe99d249 100644
+index 41a8a0b5f8..fdd91cb1ad 100644
 --- a/Libraries/LibUnicode/TimeZone.cpp
 +++ b/Libraries/LibUnicode/TimeZone.cpp
-@@ -132,7 +132,7 @@ Optional<String> resolve_primary_time_zone(StringView time_zone)
+@@ -142,7 +142,7 @@ Optional<String> resolve_primary_time_zone(StringView time_zone)
      UErrorCode status = U_ZERO_ERROR;
  
      icu::UnicodeString iana_id;

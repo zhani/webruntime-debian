@@ -1,0 +1,40 @@
+From b1bf3082a4347f83d1d7f1dcefda2ed61bb5125a Mon Sep 17 00:00:00 2001
+From: Jani Hautakangas <jani@kodegood.com>
+Date: Mon, 22 Dec 2025 23:02:02 +0200
+Subject: [PATCH 7/7] Support libxml2 < 2.12
+
+---
+ Libraries/LibWeb/XPath/XPath.cpp | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/Libraries/LibWeb/XPath/XPath.cpp b/Libraries/LibWeb/XPath/XPath.cpp
+index a7b4ec67fe..79ca7d8283 100644
+--- a/Libraries/LibWeb/XPath/XPath.cpp
++++ b/Libraries/LibWeb/XPath/XPath.cpp
+@@ -47,7 +47,12 @@ static xmlNodePtr mirror_node(xmlDocPtr doc, DOM::Node const& node)
+             attr->_private = bit_cast<void*>(&attribute);
+ 
+             if (attribute.name() == "id") {
+-                xmlAddIDSafe(attr, bit_cast<xmlChar const*>(attr_value.characters()));
++                xmlAddID(
++                    nullptr,
++                    attr->doc,
++                    bit_cast<xmlChar const*>(attr_value.characters()),
++                    attr
++                );
+             }
+         }
+         auto children = element.children_as_vector();
+@@ -153,6 +158,9 @@ static void convert_xpath_result(xmlXPathObjectPtr xpath_result, XPath::XPathRes
+         result->set_string(String::from_utf8_without_validation(bytes));
+         break;
+     }
++    case XPATH_POINT:
++    case XPATH_RANGE:
++    case XPATH_LOCATIONSET:
+     case XPATH_USERS:
+     case XPATH_XSLT_TREE: /* An XSLT value tree, non modifiable */
+         break;
+-- 
+2.48.1
+

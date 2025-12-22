@@ -67,7 +67,7 @@ config WEBRUNTIME_WPEWEBKIT
     WPEWebKit based webruntime.
 
 config WEBRUNTIME_LADYBIRD
-  bool "Ladybird"
+  bool "Ladybird (Dec 10, 2025)"
   help
     Ladybird based webruntime.
 
